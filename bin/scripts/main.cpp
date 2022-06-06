@@ -114,7 +114,7 @@ void reproduciendo_th(bool& fin, bool& estoy_menu, bool& menu, string& cancion_r
 		cout << "\033[1;91m8 -> SALIR\033[1;0m\n\n";
 		}
 		if(menu || !estoy_menu) funcionando = false;
-		if(terminado){
+		if(terminado && estoy_menu){
 			system("clear");
 			cout << endl;
 			cout << "\033[1;93m________________" << endl;
@@ -137,6 +137,8 @@ void reproduciendo_th(bool& fin, bool& estoy_menu, bool& menu, string& cancion_r
 		cout << endl;
 		cout << "\033[1;91m8 -> SALIR\033[1;0m\n\n";
 		terminado = false;
+		} else if(terminado && !estoy_menu){
+			terminado = false;
 		}
 	}
 }
