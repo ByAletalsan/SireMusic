@@ -499,7 +499,7 @@ while(opcion[0] != '8'){
 				case '5':
 					do{
 						system("clear");
-						cout << "\033[1;33mSELECCIONA UNA CANCION Ej:00, 01, 12... (PARA SALIR SELLECIONE UNA QUE NO ESTÉ)\033[1;0m" << endl;
+						cout << "\033[1;33mSELECCIONA UNA CANCION Ej:000, 001, 012... (PARA SALIR SELLECIONE UNA QUE NO ESTÉ)\033[1;0m" << endl;
 						cout << endl;
 						cout << "\033[1;37m";
 						for(unsigned i = 0; i < size_fileSongs; i++){
@@ -515,7 +515,7 @@ while(opcion[0] != '8'){
 						}
 						cout << endl;
 						cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
-						while(!isdigit(mas[0]) || !isdigit(mas[1]) || !isdigit(mas[2]) || (mas.length() != 3) || (stoi(mas) < 0) || (unsigned(stoi(mas)) > size_fileSongs)){
+						while(!isdigit(mas[0]) || !isdigit(mas[1]) || !isdigit(mas[2]) || (mas.length() != 3)){
 							cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
 						}
 						if((stoi(mas) >= 0) && (unsigned(stoi(mas)) < size_fileSongs)){
@@ -554,7 +554,7 @@ while(opcion[0] != '8'){
 					system("clear");
 					string c1, c2;
 					string s;
-					cout << "\033[1;33mSELECCIONA DOS CANCIONES Ej:00, 01, 12... (PARA SALIR SELLECIONE UNA QUE NO ESTÉ)\033[1;0m" << endl;
+					cout << "\033[1;33mSELECCIONA DOS CANCIONES Ej:000, 001, 012... (PARA SALIR SELLECIONE UNA QUE NO ESTÉ)\033[1;0m" << endl;
 					cout << endl;
 					cout << "\033[1;37m";
 					for(unsigned i = 0; i < size_fileSongs; i++){
@@ -570,7 +570,7 @@ while(opcion[0] != '8'){
 					}
 					cout << endl;
 					cout << "\033[1;36mIzquierda -> "; cin >> c1; cout << "\033[1;0m";
-					while(!isdigit(c1[0]) || !isdigit(c1[1]) || !isdigit(c1[2]) || (c1.length() != 3) || (stoi(c1) < 0) || (unsigned(stoi(c1)) > size_fileSongs)){
+					while(!isdigit(c1[0]) || !isdigit(c1[1]) || !isdigit(c1[2]) || (c1.length() != 3)){
 							cout << "\033[1;36mIzquierda -> "; cin >> c1; cout << "\033[1;0m";
 						}
 					if(stoi(c1) >= 0 && unsigned(stoi(c1)) < size_fileSongs){
