@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 00:33:38 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 00:34:32 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void run_th(bool& fin, Music_Player &player, bool& menu, string& cancion_reprodu
 
 	while(fin == false){
 		for(unsigned i = 0; i < player.getSizeList(); i++){
-			cout << player.getSongs(i).getDay() << endl;
 			if(player.getSongs(i).getDay() == dia){
 				if(player.getSongs(i).getHour() == hora){
 					if(player.getSongs(i).getMin() == min){
