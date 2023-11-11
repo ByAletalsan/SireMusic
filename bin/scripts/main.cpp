@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/11 22:23:19 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/11 23:25:48 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -568,6 +568,12 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 					system("clear");
 					cout << "\033[1;33mCANCIONES DISPONIBLES\033[1;37m" << endl;
 					cout << endl;
+					if(fileSongs.size() == 0)
+					{
+						cout << "\n\033[1;43mUPS... NO HAY NADA :/\033[1;0m" << endl;
+						sleep(3);
+						break;
+					}
 					for(unsigned i = 0; i < fileSongs.size() - 1; i++)
 					{
 						song_sec = timeSongs[i] + 1;
@@ -579,7 +585,6 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 						std::string s_song_min = to_string(song_min), s_song_sec = to_string(song_sec);
 						cout << i << ". " << fileSongs[i] << " (" << ajustarLongitudString(s_song_min, 2) << ":" << ajustarLongitudString(s_song_sec, 2) << ")" <<  endl;
 					}
-					if(fileSongs.size() == 0) cout << "\n\033[1;43mUPS... NO HAY NADA :/\033[1;0m" << endl;
 					cout << endl;
 					cout << "\033[1;43mEscribe (0) SALIR\033[1;0m" << endl;
 					cout << endl;
@@ -594,6 +599,12 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 					system("clear");
 					cout << "\033[1;33mCANCIONES DISPONIBLES\033[1;37m" << endl;
 					cout << endl;
+					if(fileSongs.size() == 0)
+					{
+						cout << "\n\033[1;43mUPS... NO HAY NADA :/\033[1;0m" << endl;
+						sleep(3);
+						break;
+					}
 					for(unsigned i = 0; i < fileSongs.size() - 1; i++)
 					{
 						song_sec = timeSongs[i] + 1;
@@ -641,6 +652,13 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 					break;
 
 				case '6':
+					system("clear");
+					if(fileSongs.size() == 0)
+					{
+						cout << "\n\033[1;43mUPS... NO HAY NADA :/\033[1;0m" << endl;
+						sleep(3);
+						break;
+					}
 					do{
 						system("clear");
 						cout << "\033[1;37m";
@@ -699,6 +717,12 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 				
 				case '7':{
 					system("clear");
+					if(fileSongs.size() < 2)
+					{
+						cout << "\n\033[1;43mUPS... NO HAY MIN 2 CANCIONES :/\033[1;0m" << endl;
+						sleep(3);
+						break;
+					}
 					string c1, c2;
 					string s;
 					cout << "\033[1;37m";

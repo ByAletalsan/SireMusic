@@ -37,6 +37,7 @@ else
 		sudo rm -rf SireMusic
 		sudo git clone https://github.com/ByAletalsan/SireMusic.git
 		sudo rm -rf SireMusic/instalador.sh
+		sudo rm -rf SireMusic/bin/music
 		sudo mkdir -p SireMusic/new_songs
 		sudo mkdir -p SireMusic/discoteca
 		sudo chmod 777 SireMusic
