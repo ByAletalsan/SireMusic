@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 00:14:51 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 00:15:44 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -634,9 +634,9 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 					index = stoi(mas);
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					cout << "\033[1;36mNUEVO NOMBRE (SIN EL .MP3 y ESPACIOS) \\> "; getline(cin, mas); cout << "\033[1;0m";
-					while (mas.find(" ") != std::string::npos || mas.find(".mp3") != std::string::npos || inVectorString(fileSongs, mas + ".mp3"))
+					while (mas.find(".mp3") != std::string::npos || inVectorString(fileSongs, mas + ".mp3"))
 					{
-						cout << "\033[1;36mNUEVO NOMBRE (SIN EL .MP3 y ESPACIOS) \\> "; getline(cin, mas); cout << "\033[1;0m";
+						cout << "\033[1;36mNUEVO NOMBRE (SIN EL .MP3) \\> "; getline(cin, mas); cout << "\033[1;0m";
 					}
 					cout << endl;
 					buffer = "mv bin/music/channel_0/" + fileSongs[index] + " bin/music/channel_0/" + mas + ".mp3";
