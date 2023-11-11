@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 00:15:44 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 00:33:38 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void intro()
 int main()
 {
 	Music_Player player;
-	intro();
+	//intro();
 	//HILOS
 	bool fin = false;
 	bool menu = true;
@@ -70,7 +70,7 @@ int main()
 	bool terminado = false;
 	string cancion_reproduciendo;
 	thread th_menu(menu_th, ref(fin), ref(player), ref(menu), ref(estoy_menu));
-  thread th_run(run_th, ref(fin), ref(player), ref(menu), ref(cancion_reproduciendo), ref(terminado));
+  	thread th_run(run_th, ref(fin), ref(player), ref(menu), ref(cancion_reproduciendo), ref(terminado));
 	thread th_reproduciendo(reproduciendo_th, ref(fin), ref(estoy_menu), ref(menu), ref(cancion_reproduciendo), ref(terminado));
 
 	if(th_run.joinable()) {
@@ -160,6 +160,7 @@ void run_th(bool& fin, Music_Player &player, bool& menu, string& cancion_reprodu
 
 	while(fin == false){
 		for(unsigned i = 0; i < player.getSizeList(); i++){
+			cout << player.getSongs(i).getDay() << endl;
 			if(player.getSongs(i).getDay() == dia){
 				if(player.getSongs(i).getHour() == hora){
 					if(player.getSongs(i).getMin() == min){
@@ -633,17 +634,17 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 						break ;
 					index = stoi(mas);
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-					cout << "\033[1;36mNUEVO NOMBRE (SIN EL .MP3 y ESPACIOS) \\> "; getline(cin, mas); cout << "\033[1;0m";
+					cout << "\033[1;36m [" << fileSongs[index] << "] NUEVO NOMBRE (SIN EL .MP3) \\> "; getline(cin, mas); cout << "\033[1;0m";
 					while (mas.find(".mp3") != std::string::npos || inVectorString(fileSongs, mas + ".mp3"))
 					{
-						cout << "\033[1;36mNUEVO NOMBRE (SIN EL .MP3) \\> "; getline(cin, mas); cout << "\033[1;0m";
+						cout << "\033[1;36m [" << fileSongs[index] << "] NUEVO NOMBRE (SIN EL .MP3) \\> "; getline(cin, mas); cout << "\033[1;0m";
 					}
 					cout << endl;
-					buffer = "mv bin/music/channel_0/" + fileSongs[index] + " bin/music/channel_0/" + mas + ".mp3";
+					buffer = "mv \"bin/music/channel_0/" + fileSongs[index] + "\" \"bin/music/channel_0/" + mas + ".mp3\"";
 					system(buffer.c_str());
-					buffer = "mv bin/music/channel_1/" + fileSongs[index] + " bin/music/channel_1/" + mas + ".mp3";
+					buffer = "mv \"bin/music/channel_1/" + fileSongs[index] + "\" \"bin/music/channel_1/" + mas + ".mp3\"";
 					system(buffer.c_str());
-					buffer = "mv bin/music/channel_2/" + fileSongs[index] + " bin/music/channel_2/" + mas + ".mp3";
+					buffer = "mv \"bin/music/channel_2/" + fileSongs[index] + "\" \"bin/music/channel_2/" + mas + ".mp3\"";
 					system(buffer.c_str());
 					lectura_songs();
 					cout << "\033[1;41mCAMBIADO CON EXITO!\033[1;0m" << endl;

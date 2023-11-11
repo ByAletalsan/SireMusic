@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:40 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/11 20:31:51 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 00:23:23 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ namespace player {
 	}
 
 	unsigned Music_Player::getSizeList() const{
-		return this->sizeList;
+		return this->listPlayer.size();
 	}
 
 	songs::Song Music_Player::getSongs(unsigned pos) const{
