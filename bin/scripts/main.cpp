@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/11 23:25:48 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 00:14:51 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void run_th(bool& fin, Music_Player &player, bool& menu, string& cancion_reprodu
 {
 	time_t now = time(0);
 	tm * tim = localtime(&now);
-	double dia = tim->tm_wday, hora = tim->tm_hour, min = tim->tm_min;
+	double dia = tim->tm_wday == 0? 6 : tim->tm_wday - 1, hora = tim->tm_hour, min = tim->tm_min;
 
 	string c[3] = {"channel_0", "channel_1", "channel_2"};
 
@@ -160,7 +160,7 @@ void run_th(bool& fin, Music_Player &player, bool& menu, string& cancion_reprodu
 
 	while(fin == false){
 		for(unsigned i = 0; i < player.getSizeList(); i++){
-			if(player.getSongs(i).getDay() == (dia - 1)){
+			if(player.getSongs(i).getDay() == dia){
 				if(player.getSongs(i).getHour() == hora){
 					if(player.getSongs(i).getMin() == min){
 							for(unsigned j = 0; j < player.getSongs(i).getSizeList(); j++){
