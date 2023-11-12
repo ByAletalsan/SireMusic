@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 01:36:45 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 01:45:27 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -474,7 +474,7 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 						}
 						f_hour = f_hour % 24;
 						cout << endl;
-						cout << "\033[1;41mGUARDADO!\033[1;0m" << endl;
+						cout << "\033[1;41m[" << fileSongs[stoi(mas)] << "] GUARDADO!\033[1;0m" << endl;
 						cout << endl;
 						cout << "\033[1;37mDeseas reproducir una cancion seguida de esta? \033[1;0m(Si : 1 / No : 0)\033[1;0m\033[1;37m" << endl;
 						cout << endl;
