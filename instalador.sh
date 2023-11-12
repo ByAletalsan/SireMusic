@@ -16,7 +16,7 @@ sudo apt-get install evince
 echo "\033[38;2;144;238;144mHerramientas instaladas!\033[0m"
 echo "\033[38;2;173;216;230mCreando programa...\033[0m"
 
-if [ -d "SireMusic" ] && [ -d "SireMusic/bin" ] && [ -d "SireMusic/bin/data" ] && [ -d "SireMusic/bin/scripts" ] && [ -d "SireMusic/bin/data/music" ]; then
+if [ -d "SireMusic" ] && [ -d "SireMusic/bin" ] && [ -d "SireMusic/bin/data" ] && [ -d "SireMusic/bin/scripts" ] && [ -d "SireMusic/bin/music" ]; then
 	echo "\033[0;31mSireMusic detectado! Quieres actualizarlo [se conservaran las canciones] (yes, no):\033[0m"
 	read opcion
 	if [ "$opcion" = "yes" ] || [ "$opcion" = "y" ]; then
