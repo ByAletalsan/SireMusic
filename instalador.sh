@@ -48,19 +48,23 @@ if [ -d "SireMusic" ] && [ -d "SireMusic/bin" ] && [ -d "SireMusic/bin/data" ] &
 		sudo rm -rf .sire_copia
 	fi
 else
-	sudo git clone https://github.com/ByAletalsan/SireMusic.git
-	sudo rm -rf SireMusic/instalador.sh
-	sudo mkdir -p SireMusic/new_songs
-	sudo mkdir -p SireMusic/discoteca
-	sudo mkdir -p SireMusic/bin/music/channel_0
-	sudo mkdir -p SireMusic/bin/music/channel_1
-	sudo mkdir -p  SireMusic/bin/music/channel_2
-	sudo chmod 777 SireMusic
-	sudo chmod 777 SireMusic/*
-	sudo chmod 777 SireMusic/bin/*
-	sudo chmod 777 SireMusic/bin/data/*
-	sudo chmod 777 SireMusic/bin/scripts/*
-	sudo chmod 777 SireMusic/bin/music/*
+	if [ -d "SireMusic" ]; then
+		echo "\033[0;31mYa existe una carpeta llamada SireMusic!\033[0m"
+	else
+		sudo git clone https://github.com/ByAletalsan/SireMusic.git
+		sudo rm -rf SireMusic/instalador.sh
+		sudo mkdir -p SireMusic/new_songs
+		sudo mkdir -p SireMusic/discoteca
+		sudo mkdir -p SireMusic/bin/music/channel_0
+		sudo mkdir -p SireMusic/bin/music/channel_1
+		sudo mkdir -p  SireMusic/bin/music/channel_2
+		sudo chmod 777 SireMusic
+		sudo chmod 777 SireMusic/*
+		sudo chmod 777 SireMusic/bin/*
+		sudo chmod 777 SireMusic/bin/data/*
+		sudo chmod 777 SireMusic/bin/scripts/*
+		sudo chmod 777 SireMusic/bin/music/*
+	fi
 fi
 cd SireMusic
 sudo make
