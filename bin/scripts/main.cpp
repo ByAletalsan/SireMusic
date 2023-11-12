@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 01:45:27 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:43:19 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void intro()
 	sleep(1);
 	cout << " #####  ### #     # ####### #     #  #####   #####  ###  #####  " << endl;
 	sleep(2);
-	cout << "\n\033[1;96mCreado por: ByAletalsan" << endl;
+	cout << "\n\033[1;96mCreado por: ByAletalsan \xe2\x9d\xa4" << endl;
 	sleep(3);
 }
 
 int main()
 {
 	Music_Player player;
-	//intro();
+	intro();
 	//HILOS
 	bool fin = false;
 	bool menu = true;

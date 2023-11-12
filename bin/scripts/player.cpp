@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:40 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 00:23:23 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:41:04 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,18 @@ namespace player {
 		string chan[3] = {"AMBOS", "DERECHA", "IZQUIERDA"};
 		for(unsigned i = 0; i < this->sizeList; i++){
 			cout << "\033[1;41m";
-			if(i < 10) cout << "0";
 			string	s_hour = to_string((int)this->listPlayer[i].getHour()), s_min = to_string((int)this->listPlayer[i].getMin());
-			cout << i << ". __" << dias[unsigned(this->listPlayer[i].getDay())] << " __ " << ajustarLongitudString(s_hour, 2) << " : " << ajustarLongitudString(s_min, 2) << " __ "; 
+			cout << i << ".\033[1;0m __";
+			string color = "\033[0;3" + to_string((int)(this->listPlayer[i].getDay() + 1)) + "m";
+			cout << color;
+			cout << dias[unsigned(this->listPlayer[i].getDay())] << "\033[1;0m__\033[0;96m" << ajustarLongitudString(s_hour, 2) << " : " << ajustarLongitudString(s_min, 2) << "\033[1;0m__ "; 
 
 			for(unsigned j = 0; j < this->listPlayer[i].getSizeList(); j++){
-				cout << "| " << this->listPlayer[i].getSong(j) << " | ";
+				cout << "| \033[0;93m" << this->listPlayer[i].getSong(j) << "\033[1;0m | ";
 			}
-			cout << "__ " << chan[this->listPlayer[i].getChannel()] << " __\033[1;0m" << endl;
+			cout << "__\033[0;92m" << chan[this->listPlayer[i].getChannel()] << "\033[1;0m__" << endl;
+			if (i + 1 < this->sizeList && this->listPlayer[i].getDay() != this->listPlayer[i + 1].getDay())
+				cout << endl;
 		}
 	}
 
