@@ -6,7 +6,7 @@
 /*   By: atalaver <atalaver@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 16:24:33 by atalaver          #+#    #+#             */
-/*   Updated: 2023/11/12 00:34:32 by atalaver         ###   ########.fr       */
+/*   Updated: 2023/11/12 01:36:45 by atalaver         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include <chrono>
 #include <thread>
 #include "utils.hpp"
+#include <random>
+#include <ctime>
 
 using namespace std;
 using namespace songs;
@@ -163,25 +165,28 @@ void run_th(bool& fin, Music_Player &player, bool& menu, string& cancion_reprodu
 			if(player.getSongs(i).getDay() == dia){
 				if(player.getSongs(i).getHour() == hora){
 					if(player.getSongs(i).getMin() == min){
-							for(unsigned j = 0; j < player.getSongs(i).getSizeList(); j++){
-								menu = false;
-								cancion_reproduciendo = player.getSongs(i).getSong(j);
+						for(unsigned j = 0; j < player.getSongs(i).getSizeList(); j++){
+							menu = false;
+							cancion_reproduciendo = player.getSongs(i).getSong(j);
+							if (inVectorString(fileSongs, cancion_reproduciendo))
+							{
 								cancion = "play \"bin/music/" + c[player.getSongs(i).getChannel()] + "/" + player.getSongs(i).getSong(j) + "\" -q";
 								system(cancion.c_str());
-								terminado = true;
-								menu = true;
-								sleep(1);
 							}
+							terminado = true;
+							menu = true;
+							sleep(1);
 						}
 					}
 				}
 			}
-			time_t now = time(0);
-			tm * tim = localtime(&now);
-			dia = tim->tm_wday;
-			hora = tim->tm_hour;
-			min = tim->tm_min;
-			sleep(1);
+		}
+		time_t now = time(0);
+		tm * tim = localtime(&now);
+		dia = tim->tm_wday == 0? 6 : tim->tm_wday - 1;
+		hora = tim->tm_hour;
+		min = tim->tm_min;
+		sleep(1);
 	}
 
 }
@@ -332,19 +337,23 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 						cout << "\033[1;0m :: \033[1;37m(" << hour << "h:" << min << "m:00s) -> (" << ajustarLongitudString(s_f_hour, 2) << "h:" << ajustarLongitudString(s_f_min, 2) << "m:" << ajustarLongitudString(s_f_sec, 2) << "s)" << endl;
 					}
 					cout << endl;
-					cout << "\033[1;37mCANCION? Ej:0, 12, 122... salir\033[1;37m" << endl << endl;
+					cout << "\033[1;37mCANCION? Ej:0, 12, 122... (* -> random) salir\033[1;37m" << endl << endl;
 					cout << "\033[1;41m____" << dias[unsigned(day[0] - '0') - 1] << " __ " << hour << " : " << min << " __ CANCION____CANAL__\033[1;0m" << endl << endl;
 					cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
-					if (mas == "salir")
-						break ;
 					while (!isStringDigit(mas) || std::stoi(mas) < 0 || std::stoi(mas) > (int)fileSongs.size() - 1)
 					{
-						cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
-						if (mas == "salir")
+						if (mas == "salir" || mas == "*")
 							break ;
+						cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
 					}
 					if (mas == "salir")
 						break ;
+					if (mas == "*")
+					{
+						std::mt19937 gen(static_cast<unsigned>(std::time(0)));
+						std::uniform_int_distribution<> dis(0, fileSongs.size() - 1);
+						mas = to_string(dis(gen));
+					}
 					//Calculamos el definitivo
 					listSongs.push_back(fileSongs[stoi(mas)]);
 					song_sec = timeSongs[stoi(mas)] + 1;
@@ -429,18 +438,22 @@ void menu_th(bool& fin, Music_Player &player, bool& menu, bool& estoy_menu)
 						for(unsigned i = 0; i < listSongs.size(); i++){ //Canciones ya seleccionadas
 							cout << listSongs[i] << endl;
 						}
-						cout << "\033[1;37m\nCANCION? Ej:0, 12, 123..., salir -> (no seleccionar ninguna más)\033[1;37m" << endl;
+						cout << "\033[1;37m\nCANCION? Ej:0, 12, 123... (* -> random) salir -> (no seleccionar ninguna más)\033[1;37m" << endl;
 						cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
-						if (mas == "salir")
-							break ;
 						while (!isStringDigit(mas) || std::stoi(mas) < 0 || std::stoi(mas) > (int)fileSongs.size() - 1)
 						{
-							cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
-							if (mas == "salir")
+							if (mas == "salir" || mas == "*")
 								break ;
+							cout << "\033[1;36m\\> "; cin >> mas; cout << "\033[1;0m";
 						}
 						if (mas == "salir")
 							break ;
+						if (mas == "*")
+						{
+							std::mt19937 gen(static_cast<unsigned>(std::time(0)));
+							std::uniform_int_distribution<> dis(0, fileSongs.size() - 1);
+							mas = to_string(dis(gen));
+						}
 						listSongs.push_back(fileSongs[stoi(mas)]);
 						song_sec = timeSongs[stoi(mas)] + 1;
 						song_min = 0;

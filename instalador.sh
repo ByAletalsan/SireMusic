@@ -15,7 +15,39 @@ sudo apt-get install git
 sudo apt-get install evince
 echo "\033[38;2;144;238;144mHerramientas instaladas!\033[0m"
 echo "\033[38;2;173;216;230mCreando programa...\033[0m"
-if [ ! -d "SireMusic" ]; then
+
+if [ -d "SireMusic" ] && [ -d "SireMusic/bin" ] && [ -d "SireMusic/bin/data" ] && [ -d "SireMusic/bin/scripts" ] && [ -d "SireMusic/bin/data/music" ]; then
+	echo "\033[0;31mSireMusic detectado! Quieres actualizarlo [se conservaran las canciones] (yes, no):\033[0m"
+	read opcion
+	if [ "$opcion" = "yes" ] || [ "$opcion" = "y" ]; then
+		sudo mkdir -p .sire_copia
+		sudo mv SireMusic/bin/music .sire_copia/music_copia
+		sudo mv SireMusic/bin/data .sire_copia/data_copia
+		if [ -d "SireMusic/discoteca" ]; then
+			sudo mv SireMusic/discoteca .sire_copia/discoteca_copia
+		fi
+		sudo rm -rf SireMusic
+		sudo git clone https://github.com/ByAletalsan/SireMusic.git
+		sudo rm -rf SireMusic/instalador.sh
+		sudo rm -rf SireMusic/bin/music
+		sudo rm -rf SireMusic/bin/data
+		sudo mkdir -p SireMusic/new_songs
+		if [ ! -d ".sire_copia/discoteca_copia" ]; then
+			sudo mkdir -p SireMusic/discoteca
+		fi
+		sudo chmod 777 SireMusic
+		sudo chmod 777 SireMusic/*
+		sudo chmod 777 SireMusic/bin/*
+		sudo chmod 777 SireMusic/bin/data/*
+		sudo chmod 777 SireMusic/bin/scripts/*
+		sudo mv .sire_copia/music_copia SireMusic/bin/music
+		sudo mv .sire_copia/data_copia SireMusic/bin/data
+		if [ -d ".sire_copia/discoteca_copia" ]; then
+			sudo mv .sire_copia/discoteca_copia SireMusic/discoteca
+		fi
+		sudo rm -rf .sire_copia
+	fi
+else
 	sudo git clone https://github.com/ByAletalsan/SireMusic.git
 	sudo rm -rf SireMusic/instalador.sh
 	sudo mkdir -p SireMusic/new_songs
@@ -29,24 +61,6 @@ if [ ! -d "SireMusic" ]; then
 	sudo chmod 777 SireMusic/bin/data/*
 	sudo chmod 777 SireMusic/bin/scripts/*
 	sudo chmod 777 SireMusic/bin/music/*
-else
-	echo "\033[0;31mSireMusic detectado! Quieres actualizarlo [se conservaran las canciones] (yes, no):\033[0m"
-	read opcion
-	if [ "$opcion" = "yes" ] || [ "$opcion" = "y" ]; then
-		sudo mv SireMusic/bin/music music_copia
-		sudo rm -rf SireMusic
-		sudo git clone https://github.com/ByAletalsan/SireMusic.git
-		sudo rm -rf SireMusic/instalador.sh
-		sudo rm -rf SireMusic/bin/music
-		sudo mkdir -p SireMusic/new_songs
-		sudo mkdir -p SireMusic/discoteca
-		sudo chmod 777 SireMusic
-		sudo chmod 777 SireMusic/*
-		sudo chmod 777 SireMusic/bin/*
-		sudo chmod 777 SireMusic/bin/data/*
-		sudo chmod 777 SireMusic/bin/scripts/*
-		sudo mv music_copia SireMusic/bin/music
-	fi
 fi
 cd SireMusic
 sudo make
